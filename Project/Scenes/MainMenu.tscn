@@ -1,0 +1,124 @@
+[gd_scene load_steps=6 format=3 uid="uid://dw6vaixaacg1a"]
+
+[ext_resource type="FontFile" uid="uid://csvwt6tnltkju" path="res://Assets/Fonts/EightBit Atari-Text.ttf" id="1_bwx3f"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_nsewh"]
+[ext_resource type="Script" path="res://Scripts/MenuItem.cs" id="3_83f2v"]
+[ext_resource type="PackedScene" uid="uid://berv6fu8lxisr" path="res://Scenes/Cursor.tscn" id="4_3ncax"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8h3hg"]
+bg_color = Color(0.054902, 0.054902, 0.054902, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nsewh")
+
+[node name="MainMenuPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8h3hg")
+
+[node name="MainMenuMargin" type="MarginContainer" parent="MainMenuPanel"]
+layout_mode = 2
+
+[node name="MainMenuVerticalBox" type="VBoxContainer" parent="MainMenuPanel/MainMenuMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="VsCPU" type="Label" parent="MainMenuPanel/MainMenuMargin/MainMenuVerticalBox"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bwx3f")
+text = "1P vs CPU"
+horizontal_alignment = 1
+script = ExtResource("3_83f2v")
+
+[node name="Vs2P" type="Label" parent="MainMenuPanel/MainMenuMargin/MainMenuVerticalBox"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bwx3f")
+text = "1P vs 2P"
+horizontal_alignment = 1
+script = ExtResource("3_83f2v")
+
+[node name="Exit" type="Label" parent="MainMenuPanel/MainMenuMargin/MainMenuVerticalBox"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bwx3f")
+text = "EXIT"
+horizontal_alignment = 1
+script = ExtResource("3_83f2v")
+
+[node name="CPULevelPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8h3hg")
+
+[node name="CPULevelMargin" type="MarginContainer" parent="CPULevelPanel"]
+layout_mode = 2
+
+[node name="CPULevelVerticalBox" type="VBoxContainer" parent="CPULevelPanel/CPULevelMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Easy" type="Label" parent="CPULevelPanel/CPULevelMargin/CPULevelVerticalBox"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bwx3f")
+text = "EASY"
+horizontal_alignment = 1
+script = ExtResource("3_83f2v")
+
+[node name="Normal" type="Label" parent="CPULevelPanel/CPULevelMargin/CPULevelVerticalBox"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bwx3f")
+text = "NORMAL"
+horizontal_alignment = 1
+script = ExtResource("3_83f2v")
+
+[node name="Hard" type="Label" parent="CPULevelPanel/CPULevelMargin/CPULevelVerticalBox"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bwx3f")
+text = "HARD"
+horizontal_alignment = 1
+script = ExtResource("3_83f2v")
+
+[node name="Back" type="Label" parent="CPULevelPanel/CPULevelMargin/CPULevelVerticalBox"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bwx3f")
+text = "BACK"
+horizontal_alignment = 1
+script = ExtResource("3_83f2v")
+
+[node name="Cursor" parent="." instance=ExtResource("4_3ncax")]
+layout_mode = 0
+MenuParentPath = NodePath("../MainMenuPanel/MainMenuMargin/MainMenuVerticalBox")
+CursorOffset = Vector2(10, -15)
+
+[connection signal="CursorSelected" from="MainMenuPanel/MainMenuMargin/MainMenuVerticalBox/VsCPU" to="." method="OnVsCpuCursorSelected"]
+[connection signal="CursorSelected" from="MainMenuPanel/MainMenuMargin/MainMenuVerticalBox/Vs2P" to="." method="OnVs2PCursorSelected"]
+[connection signal="CursorSelected" from="MainMenuPanel/MainMenuMargin/MainMenuVerticalBox/Exit" to="." method="OnExitCursorSelected"]
+[connection signal="CursorSelected" from="CPULevelPanel/CPULevelMargin/CPULevelVerticalBox/Easy" to="." method="OnEasyCursorSelected"]
+[connection signal="CursorSelected" from="CPULevelPanel/CPULevelMargin/CPULevelVerticalBox/Normal" to="." method="OnNormalCursorSelected"]
+[connection signal="CursorSelected" from="CPULevelPanel/CPULevelMargin/CPULevelVerticalBox/Hard" to="." method="OnHardCursorSelected"]
+[connection signal="CursorSelected" from="CPULevelPanel/CPULevelMargin/CPULevelVerticalBox/Back" to="." method="OnBackCursorSelected"]
